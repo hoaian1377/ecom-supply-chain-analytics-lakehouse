@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+env/
+
+# Docker volumes
+postgres_data/
+minio_data/
+
+# Data files (Don't push raw data to GitHub)
+*.parquet
+*.json
+*.csv
