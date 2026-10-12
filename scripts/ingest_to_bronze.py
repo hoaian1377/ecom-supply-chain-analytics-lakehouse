@@ -4,11 +4,16 @@ import os
 import json
 from dotenv import load_dotenv
 
-load_dotenv()
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(BASE_DIR, ".env"))
+
 def Connect_Minio():
+    endpoint = os.getenv("MINIO_ENDPOINT")
+    if not endpoint:
+        endpoint = "http://minio:9000" if os.path.exists("/.dockerenv") else "http://localhost:9000"
     s3_client = boto3.client(
         's3',
-        endpoint_url = "http://localhost:9000",
+        endpoint_url = endpoint,
         aws_access_key_id = os.getenv('MINIO_ROOT_USER'),
         aws_secret_access_key = os.getenv('MINIO_ROOT_PASSWORD'),
         region_name = 'us-east-1'
@@ -18,10 +23,11 @@ def Connect_Minio():
 def Upload_to_minio():
     s3 = Connect_Minio()
     bucket_name = 'bronze-layer'
+    raw_dir = os.path.join(BASE_DIR, "data", "raw")
     file_upload = [
-        (r"C:\duan\DE\E-Commerce Supply Chain Analytics Lakehouse\data\raw\carriers.json","raw_carriers.json"),
-        (r"C:\duan\DE\E-Commerce Supply Chain Analytics Lakehouse\data\raw\orders.json","raw_orders.json"),
-        (r"C:\duan\DE\E-Commerce Supply Chain Analytics Lakehouse\data\raw\shipments.json","raw_shipments.json")
+        (os.path.join(raw_dir, "carriers.json"), "raw_carriers.json"),
+        (os.path.join(raw_dir, "orders.json"), "raw_orders.json"),
+        (os.path.join(raw_dir, "shipments.json"), "raw_shipments.json")
     ]
 
     for local_path, object_name in file_upload:

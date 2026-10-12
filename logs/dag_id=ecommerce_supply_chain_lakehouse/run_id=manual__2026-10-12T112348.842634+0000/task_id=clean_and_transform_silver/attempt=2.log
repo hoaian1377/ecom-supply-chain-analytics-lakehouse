@@ -1,0 +1,33 @@
+[2026-10-12T11:29:07.300+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ecommerce_supply_chain_lakehouse.clean_and_transform_silver manual__2026-10-12T11:23:48.842634+00:00 [queued]>
+[2026-10-12T11:29:07.334+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ecommerce_supply_chain_lakehouse.clean_and_transform_silver manual__2026-10-12T11:23:48.842634+00:00 [queued]>
+[2026-10-12T11:29:07.337+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2026-10-12T11:29:07.392+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): clean_and_transform_silver> on 2026-10-12 11:23:48.842634+00:00
+[2026-10-12T11:29:07.431+0000] {standard_task_runner.py:60} INFO - Started process 499 to run task
+[2026-10-12T11:29:07.449+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'ecommerce_supply_chain_lakehouse', 'clean_and_transform_silver', 'manual__2026-10-12T11:23:48.842634+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/supply_chain_pipeline_dag.py', '--cfg-path', '/tmp/tmpyr6ha7aa']
+[2026-10-12T11:29:07.456+0000] {standard_task_runner.py:88} INFO - Job 10: Subtask clean_and_transform_silver
+[2026-10-12T11:29:07.738+0000] {task_command.py:423} INFO - Running <TaskInstance: ecommerce_supply_chain_lakehouse.clean_and_transform_silver manual__2026-10-12T11:23:48.842634+00:00 [running]> on host 75c623682f6e
+[2026-10-12T11:29:08.118+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_engineer' AIRFLOW_CTX_DAG_ID='ecommerce_supply_chain_lakehouse' AIRFLOW_CTX_TASK_ID='clean_and_transform_silver' AIRFLOW_CTX_EXECUTION_DATE='2026-10-12T11:23:48.842634+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-10-12T11:23:48.842634+00:00'
+[2026-10-12T11:29:08.123+0000] {logging_mixin.py:188} INFO - Đang xử lý dữ liệu...
+[2026-10-12T11:29:08.131+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/scripts/cleaning_data.py", line 81, in main
+    df_carriers = clean_carriers_data()
+  File "/opt/airflow/scripts/cleaning_data.py", line 24, in clean_carriers_data
+    df = pd.read_json(file_path)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/json/_json.py", line 760, in read_json
+    json_reader = JsonReader(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/json/_json.py", line 861, in __init__
+    data = self._get_data_from_filepath(filepath_or_buffer)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/json/_json.py", line 917, in _get_data_from_filepath
+    raise FileNotFoundError(f"File {filepath_or_buffer} does not exist")
+FileNotFoundError: File C:\duan\DE\E-Commerce Supply Chain Analytics Lakehouse\data\raw\carriers.json does not exist
+[2026-10-12T11:29:08.164+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=ecommerce_supply_chain_lakehouse, task_id=clean_and_transform_silver, execution_date=20261012T112348, start_date=20261012T112907, end_date=20261012T112908
+[2026-10-12T11:29:08.200+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 10 for task clean_and_transform_silver (File C:\duan\DE\E-Commerce Supply Chain Analytics Lakehouse\data\raw\carriers.json does not exist; 499)
+[2026-10-12T11:29:08.274+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-10-12T11:29:08.369+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

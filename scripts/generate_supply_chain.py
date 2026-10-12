@@ -2,6 +2,7 @@ import json
 import random
 from datetime import datetime, timedelta
 from faker import Faker
+import os
 
 # Khởi tạo Faker tiếng Việt
 fake = Faker('vi_VN')
@@ -87,17 +88,22 @@ def generate_supply_chain_dataset(num_records=100):
         }
         shipments.append(shipment)
 
+    # Xác định đường dẫn thư mục data/raw
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    raw_dir = os.path.join(base_dir, "data", "raw")
+    os.makedirs(raw_dir, exist_ok=True)
+
     # Xuất dữ liệu ra file JSON
-    with open("carriers.json", "w", encoding="utf-8") as f:
+    with open(os.path.join(raw_dir, "carriers.json"), "w", encoding="utf-8") as f:
         json.dump(carriers, f, ensure_ascii=False, indent=2)
         
-    with open("orders.json", "w", encoding="utf-8") as f:
+    with open(os.path.join(raw_dir, "orders.json"), "w", encoding="utf-8") as f:
         json.dump(orders, f, ensure_ascii=False, indent=2)
 
-    with open("shipments.json", "w", encoding="utf-8") as f:
+    with open(os.path.join(raw_dir, "shipments.json"), "w", encoding="utf-8") as f:
         json.dump(shipments, f, ensure_ascii=False, indent=2)
 
-    print(f" Đã tạo thành công {num_records} bản ghi ra 3 file JSON!")
+    print(f" Đã tạo thành công {num_records} bản ghi vào {raw_dir}!")
 
 if __name__ == "__main__":
     generate_supply_chain_dataset(num_records=100)

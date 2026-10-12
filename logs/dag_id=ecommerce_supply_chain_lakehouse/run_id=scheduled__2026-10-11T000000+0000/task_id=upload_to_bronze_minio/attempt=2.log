@@ -1,0 +1,16 @@
+[2026-10-12T11:41:16.115+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: ecommerce_supply_chain_lakehouse.upload_to_bronze_minio scheduled__2026-10-11T00:00:00+00:00 [queued]>
+[2026-10-12T11:41:16.275+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: ecommerce_supply_chain_lakehouse.upload_to_bronze_minio scheduled__2026-10-11T00:00:00+00:00 [queued]>
+[2026-10-12T11:41:16.373+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 3
+[2026-10-12T11:41:16.847+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): upload_to_bronze_minio> on 2026-10-11 00:00:00+00:00
+[2026-10-12T11:41:17.011+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'ecommerce_supply_chain_lakehouse', 'upload_to_bronze_minio', 'scheduled__2026-10-11T00:00:00+00:00', '--job-id', '17', '--raw', '--subdir', 'DAGS_FOLDER/supply_chain_pipeline_dag.py', '--cfg-path', '/tmp/tmptri0lyn2']
+[2026-10-12T11:41:16.992+0000] {standard_task_runner.py:60} INFO - Started process 317 to run task
+[2026-10-12T11:41:17.084+0000] {standard_task_runner.py:88} INFO - Job 17: Subtask upload_to_bronze_minio
+[2026-10-12T11:41:19.657+0000] {task_command.py:423} INFO - Running <TaskInstance: ecommerce_supply_chain_lakehouse.upload_to_bronze_minio scheduled__2026-10-11T00:00:00+00:00 [running]> on host 065ad16815fe
+[2026-10-12T11:41:21.690+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_engineer' AIRFLOW_CTX_DAG_ID='ecommerce_supply_chain_lakehouse' AIRFLOW_CTX_TASK_ID='upload_to_bronze_minio' AIRFLOW_CTX_EXECUTION_DATE='2026-10-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-10-11T00:00:00+00:00'
+[2026-10-12T11:41:45.741+0000] {logging_mixin.py:188} INFO - Upload thành công: /opt/***/data/raw/carriers.json -> [bronze-layer/raw_carriers.json]"
+[2026-10-12T11:41:46.844+0000] {logging_mixin.py:188} INFO - Upload thành công: /opt/***/data/raw/orders.json -> [bronze-layer/raw_orders.json]"
+[2026-10-12T11:41:48.129+0000] {logging_mixin.py:188} INFO - Upload thành công: /opt/***/data/raw/shipments.json -> [bronze-layer/raw_shipments.json]"
+[2026-10-12T11:41:48.194+0000] {python.py:201} INFO - Done. Returned value was: None
+[2026-10-12T11:41:48.874+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=ecommerce_supply_chain_lakehouse, task_id=upload_to_bronze_minio, execution_date=20261011T000000, start_date=20261012T114116, end_date=20261012T114148
+[2026-10-12T11:41:50.647+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-10-12T11:41:51.247+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
